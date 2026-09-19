@@ -1,0 +1,6 @@
+{
+  "name": "conscious-os",
+  "description": "Run Conscious OS coaching exercises in your coach's voice, with your own profile and history.",
+  "skills": ["skills/conscious-os"],
+  "mcp": "mcp.json"
+}
