@@ -1,0 +1,7 @@
+{
+  "name": "conscious-os-skill",
+  "owner": { "name": "Eric Page" },
+  "plugins": [
+    { "name": "conscious-os", "source": "./" }
+  ]
+}
