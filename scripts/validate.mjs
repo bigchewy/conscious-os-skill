@@ -36,7 +36,7 @@ export function parseSkillFrontmatter(skillMdText) {
   const block = match[1]
   const nameMatch = block.match(/^name:\s*(.+)$/m)
   const licenseMatch = block.match(/^license:\s*(.+)$/m)
-  const descMatch = block.match(/^description:\s*>?\s*\n([\s\S]*?)(?=\n\w+:|$)/m)
+  const descMatch = block.match(/(?:^|\n)description:\s*>?\s*\n([\s\S]*?)(?:\n\w+:|$)/)
   const description = descMatch
     ? descMatch[1]
         .split('\n')
