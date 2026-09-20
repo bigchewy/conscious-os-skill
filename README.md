@@ -1,5 +1,8 @@
 # Conscious OS launcher skill
 
+The canonical setup page is https://theconsciousos.com/connect. Everything
+below is the same recipe.
+
 Run Conscious OS coaching exercises — in your own coach's voice, with your
 profile and history — from any AI tool you already use. This repo holds one
 skill and two plugin manifests. The exercises themselves live behind

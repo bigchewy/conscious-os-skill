@@ -3,6 +3,10 @@
   "description": "Run Conscious OS coaching exercises in your coach's voice, with your own profile and history.",
   "version": "1.0.0",
   "author": { "name": "Eric Page" },
+  "homepage": "https://theconsciousos.com/connect",
+  "repository": "https://github.com/bigchewy/conscious-os-skill",
+  "license": "MIT",
+  "keywords": ["coaching", "leadership", "conscious-leadership", "mcp"],
   "mcpServers": {
     "conscious-os": {
       "type": "http",

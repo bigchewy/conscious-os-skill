@@ -67,6 +67,14 @@ export function checkSkillFrontmatter(skillMdText, expectedName) {
   }
 }
 
+export function checkDirectoryFields(claudePluginJsonObj) {
+  for (const field of ['homepage', 'repository', 'license', 'keywords']) {
+    if (!claudePluginJsonObj?.[field]) {
+      throw new Error(`.claude-plugin/plugin.json is missing "${field}", which the plugin directory lists`)
+    }
+  }
+}
+
 export function main(rootDir) {
   try {
     const claudePlugin = parseJson(
@@ -80,6 +88,9 @@ export function main(rootDir) {
     const skillMd = readFileSync(join(rootDir, 'skills/conscious-os/SKILL.md'), 'utf8')
     checkSkillFrontmatter(skillMd, 'conscious-os')
     console.log('ok: SKILL.md frontmatter is valid')
+
+    checkDirectoryFields(claudePlugin)
+    console.log('ok: plugin directory fields present')
   } catch (error) {
     console.error(`FAIL: ${error.message}`)
     process.exit(1)

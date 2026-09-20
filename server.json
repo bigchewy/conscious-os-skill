@@ -1,0 +1,10 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.theconsciousos/conscious-os",
+  "description": "Guided leadership coaching exercises in your coach's voice, with your own profile and history.",
+  "repository": { "url": "https://github.com/bigchewy/conscious-os-skill", "source": "github" },
+  "version": "1.0.0",
+  "remotes": [
+    { "type": "streamable-http", "url": "https://theconsciousos.com/api/mcp" }
+  ]
+}

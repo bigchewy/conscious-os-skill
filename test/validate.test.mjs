@@ -1,11 +1,14 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import {
   parseJson,
   getMcpServerUrl,
   checkUrlsMatch,
   parseSkillFrontmatter,
   checkSkillFrontmatter,
+  checkDirectoryFields,
 } from '../scripts/validate.mjs'
 
 test('parseJson parses valid JSON', () => {
@@ -94,4 +97,48 @@ test('checkSkillFrontmatter throws when description exceeds 1024 characters', ()
   const longLine = '  ' + 'x'.repeat(1100)
   const md = ['---', 'name: conscious-os', 'description: >', longLine, 'license: MIT', '---'].join('\n')
   assert.throws(() => checkSkillFrontmatter(md, 'conscious-os'), /1024/)
+})
+
+test('checkDirectoryFields throws when homepage is missing', () => {
+  const manifest = {
+    repository: 'https://github.com/bigchewy/conscious-os-skill',
+    license: 'MIT',
+    keywords: ['coaching'],
+  }
+  assert.throws(() => checkDirectoryFields(manifest), /homepage/)
+})
+
+test('checkDirectoryFields throws when repository is missing', () => {
+  const manifest = {
+    homepage: 'https://theconsciousos.com/connect',
+    license: 'MIT',
+    keywords: ['coaching'],
+  }
+  assert.throws(() => checkDirectoryFields(manifest), /repository/)
+})
+
+test('checkDirectoryFields throws when license is missing', () => {
+  const manifest = {
+    homepage: 'https://theconsciousos.com/connect',
+    repository: 'https://github.com/bigchewy/conscious-os-skill',
+    keywords: ['coaching'],
+  }
+  assert.throws(() => checkDirectoryFields(manifest), /license/)
+})
+
+test('checkDirectoryFields throws when keywords is missing', () => {
+  const manifest = {
+    homepage: 'https://theconsciousos.com/connect',
+    repository: 'https://github.com/bigchewy/conscious-os-skill',
+    license: 'MIT',
+  }
+  assert.throws(() => checkDirectoryFields(manifest), /keywords/)
+})
+
+test('checkDirectoryFields passes for the real plugin manifest', () => {
+  const claudePlugin = parseJson(
+    readFileSync(join(import.meta.dirname, '../.claude-plugin/plugin.json'), 'utf8'),
+    '.claude-plugin/plugin.json',
+  )
+  assert.doesNotThrow(() => checkDirectoryFields(claudePlugin))
 })
